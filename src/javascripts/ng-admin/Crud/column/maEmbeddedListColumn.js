@@ -1,4 +1,4 @@
-import Entry from 'admin-config/lib/Entry';
+import Entry from 'mindwards-admin-config/lib/Entry';
 
 function sorter(sortField, sortDir) {
     return (entry1, entry2) => {

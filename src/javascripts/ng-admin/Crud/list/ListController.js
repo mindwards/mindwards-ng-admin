@@ -1,4 +1,4 @@
-import Entry from 'admin-config/lib/Entry';
+import Entry from 'mindwards-admin-config/lib/Entry';
 
 export default class ListController {
     constructor($scope, $stateParams, $location, $anchorScroll, ReadQueries, progression, view, dataStore, totalItems) {

@@ -1,9 +1,9 @@
 describe('ReferenceField', function() {
     var choiceDirective = require('../../../../ng-admin/Crud/field/maChoiceField');
     var referenceDirective = require('../../../../ng-admin/Crud/field/maReferenceField');
-    var ReferenceField = require('admin-config/lib/Field/ReferenceField');
+    var ReferenceField = require('mindwards-admin-config/lib/Field/ReferenceField');
     var mixins = require('../../../mock/mixins');
-    var DataStore = require('admin-config/lib/DataStore/DataStore');
+    var DataStore = require('mindwards-admin-config/lib/DataStore/DataStore');
 
     var $compile, $timeout, scope;
     const directiveUsage = `
