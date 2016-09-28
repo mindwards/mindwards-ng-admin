@@ -2,7 +2,7 @@
   "name": "mindwards-ng-admin",
   "main": [
     "build/ng-admin.min.css",
-    "build/ng-admin.min.js"
+    "build/ng-admin.js"
   ],
   "ignore": [
     "examples",

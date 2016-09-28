@@ -25,6 +25,12 @@ build:
 	@cp -Rf build examples/blog/
 	@echo "Files build/ng-admin.min.css and build/ng-admin.min.js updated (with minification)"
 
+build_raw:
+	@make transpile
+	@NODE_ENV=production WEBPACK_NOMIN=true ./node_modules/webpack/bin/webpack.js --optimize-occurence-order --optimize-dedupe --progress --devtool
+	@cp -Rf build examples/blog/
+	@echo "Files build/ng-admin.css and build/ng-admin.js updated (no minification)"
+
 test: test-unit test-e2e
 
 test-unit:

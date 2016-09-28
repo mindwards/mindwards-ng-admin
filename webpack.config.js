@@ -5,15 +5,20 @@ module.exports = {
         'ng-admin': [
             __dirname + '/src/javascripts/ng-admin.js',
             __dirname + '/src/sass/ng-admin.scss',
-        ],
+        ]
     },
     output: process.env.NODE_ENV === 'test' ? {
         path: './src/javascripts/test/fixtures/examples/blog/',
         filename: "build/[name].min.js"
-    } : {
-        publicPath: "http://localhost:8000/",
-        filename: "build/[name].min.js"
-    },
+    } : (
+        process.env.WEBPACK_NOMIN ? {
+            publicPath: "http://localhost:8000/",
+            filename: "build/[name].js"
+        } : {
+            publicPath: "http://localhost:8000/",
+            filename: "build/[name].min.js"
+        }
+    ),
     module: {
         loaders: [
             { test: /\.js/, loaders: ['babel'], include: __dirname + '/src/javascripts' },
