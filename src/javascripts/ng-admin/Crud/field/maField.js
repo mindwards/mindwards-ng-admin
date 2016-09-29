@@ -25,6 +25,11 @@ export default function maField(FieldViewConfiguration, $compile) {
                 return scope.form[field.name()];
             };
 
+            // HP: added new scope callback
+            if (field.scopeCallback()) {
+                field.scopeCallback()(scope);
+            }
+
             /**
              * Should validation status be displayed for a given field?
              *

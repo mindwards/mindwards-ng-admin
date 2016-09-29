@@ -14,11 +14,6 @@ export default function maReferenceManyField(ReferenceRefresher) {
             scope.v = field.validation();
             scope.choices = [];
 
-            // HP: added new scope callback
-            if (field.scopeCallback()) {
-                field.scopeCallback()(scope);
-            }
-
             const setInitialChoices = (initialEntries) => {
                 if (scope.value && scope.value.length) {
                     scope.value.map((value) => {
