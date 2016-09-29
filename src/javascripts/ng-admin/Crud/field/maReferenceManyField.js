@@ -14,6 +14,11 @@ export default function maReferenceManyField(ReferenceRefresher) {
             scope.v = field.validation();
             scope.choices = [];
 
+            // HP: added new scope callback
+            if (field.scopeCallback()) {
+                field.scopeCallback()(scope);
+            }
+
             const setInitialChoices = (initialEntries) => {
                 if (scope.value && scope.value.length) {
                     scope.value.map((value) => {
@@ -46,7 +51,7 @@ export default function maReferenceManyField(ReferenceRefresher) {
                 // ui-select doesn't allow to prepopulate autocomplete selects, see https://github.com/angular-ui/ui-select/issues/1197
                 // let ui-select fetch the options using the ReferenceRefresher
                 scope.refresh = (search) => {
-                    return ReferenceRefresher.refresh(field, scope.value, search)
+                    return ReferenceRefresher.refresh(field, scope.value, search, scope.$parent.entry /*HP: Added field*/)
                         .then(formattedResults => {
                             scope.$broadcast('choices:update', { choices: formattedResults });
                         });

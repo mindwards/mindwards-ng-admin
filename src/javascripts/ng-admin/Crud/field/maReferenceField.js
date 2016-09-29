@@ -35,7 +35,7 @@ export default function maReferenceField(ReferenceRefresher) {
                 // ui-select doesn't allow to prepopulate autocomplete selects, see https://github.com/angular-ui/ui-select/issues/1197
                 // let ui-select fetch the options using the ReferenceRefresher
                 scope.refresh = function refresh(search) {
-                    return ReferenceRefresher.refresh(field, scope.value, search)
+                    return ReferenceRefresher.refresh(field, scope.value, search, scope.$parent.entry /*HP: Added field*/)
                         .then(function addCurrentChoice(results) {
                             if (!search && scope.value) {
                                 const isCurrentValueInEntries = results.filter(e => e.value === scope.value).length > 0;
