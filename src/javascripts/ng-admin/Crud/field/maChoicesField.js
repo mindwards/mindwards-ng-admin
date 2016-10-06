@@ -20,9 +20,23 @@ export default function maChoicesField($compile) {
                 pre: function(scope, element) {
                     var field = scope.field();
                     var attributes = field.attributes();
-                    scope.placeholder = (attributes && attributes.placeholder) || 'FILTER_VALUES';
                     scope.name = field.name();
                     scope.v = field.validation();
+
+                    var placeholderText;
+
+                    if (attributes && attributes.placeholder) {
+                        placeholderText = '{{ ' + attributes.placeholder + ' | translate }}';
+                    } else if (field.rawPlaceholder()) {
+                        
+                        scope.phFunc = function() {
+                            return field.rawPlaceholder()(scope.$parent.$parent.$parent.entry);
+                        }
+
+                        placeholderText = '{{phFunc()}}';
+                    } else {
+                        placeholderText = "{{ 'FILTER_VALUES' | translate }}";
+                    }
 
                     var refreshAttributes = '';
                     var itemsFilter = '| filter: {label: $select.search}';
@@ -40,7 +54,7 @@ export default function maChoicesField($compile) {
 
                     var template = `
                         <ui-select ${scope.v.required ? 'ui-select-required' : ''} multiple on-remove="onRemove()" ng-model="$parent.value" ng-required="v.required" id="{{ name }}" name="{{ name }}">
-                            <ui-select-match placeholder="{{ placeholder | translate }}">{{ $item.label | translate }}</ui-select-match>
+                            <ui-select-match placeholder="${placeholderText}">{{ $item.label | translate }}</ui-select-match>
                             <ui-select-choices ${refreshAttributes} repeat="item.value as item in choices ${itemsFilter}">
                                 {{ item.label | translate }}
                             </ui-select-choices>

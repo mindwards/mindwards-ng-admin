@@ -51,6 +51,7 @@ export default function maReferenceManyField(ReferenceRefresher) {
                             scope.$broadcast('choices:update', { choices: formattedResults });
                         });
                 };
+
             }
         },
         template: `<ma-choices-field
