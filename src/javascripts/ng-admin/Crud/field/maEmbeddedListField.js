@@ -21,7 +21,10 @@ export default function maEmbeddedListField() {
                     const filters = field.permanentFilters();
                     const filterKeys = Object.keys(filters);
                     filterFunc = (entry) => {
-                        return filterKeys.reduce((isFiltered, key) => isFiltered && entry.values[key] === filters[key], true);
+                        return filterKeys.reduce((isFiltered, key) => {
+                            const val = angular.isFunction(filters[key]) ? filters[key]() : filters[key];
+                            return isFiltered && entry.values[key] === val;
+                        }, true);
                     };
                 } else {
                     filterFunc = () => true;

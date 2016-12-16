@@ -35,7 +35,9 @@ export default function maEmbeddedListColumn(NgAdminConfiguration) {
                 if (field.permanentFilters()) {
                     const filters = field.permanentFilters();
                     const filterKeys = Object.keys(filters);
-                    filterFunc = (entry) => filterKeys.reduce((isFiltered, key) => isFiltered && entry.values[key] === filters[key], true);
+                    filterFunc = (entry) => filterKeys.reduce((isFiltered, key) => {
+                        const val = angular.isFunction(filters[key]) ? filters[key]() : filters[key];
+                        return isFiltered && entry.values[key] === val}, true);
                 } else {
                     filterFunc = () => true;
                 }
